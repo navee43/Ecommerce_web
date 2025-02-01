@@ -15,12 +15,28 @@ const app = express()
 const port = process.env.PORT || 5000;
 
 connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 5000 , ()=>{
+        console.log(`server is running at port ${process.env.PORT ||5000}`);
+        
+    })
+    app.on("error" ,(error)=>{
+        console.log("error",error);
+        
+        throw error
+    })
+
+}).catch((error)=>{
+    console.log("mongodb connection failed !!! " , error);
+    
+})
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
-app.get('/api/v1/home' , (req, res)=>{
-    res.send("hello india")
-})
-app.listen(port , ()=>{
-    console.log(`server is successfully running on port ${port}`)
-})
+// app.get('/api/v1/home' , (req, res)=>{
+//     res.send("hello india")
+// })
+// app.listen(port , ()=>{
+//     console.log(`server is successfully running on port ${port}`)
+// })
