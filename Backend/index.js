@@ -34,6 +34,14 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
+
+//import route
+import userRoutes from './routes/user.routes.js'
+
+//route declaration 
+app.use("/api/v1/users" , userRoutes)
+
+
 // app.get('/api/v1/home' , (req, res)=>{
 //     res.send("hello india")
 // })
